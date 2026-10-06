@@ -36,19 +36,18 @@
     const canvas = document.querySelector("#field");
     const ctx = canvas.getContext("2d");
 
-    function chooseTarget(enemies) {
+        function chooseTarget(enemies) {
       let target = null;
-        // Pick the living enemy with the most remaining health (current health, not maxHealth).
+      // Pick the living enemy with the most remaining health (current health, not maxHealth).
       for (const enemy of enemies) {
-        // If health is zero, that enemy is not alive.
         if (enemy.health <= 0) {
           continue;
         }
         // On a tie, the later enemy replaces the earlier one (>= rather than >).
         if (!target || enemy.health >= target.health) {
           target = enemy;
+        }
       }
-    }
       return target;
     }
 

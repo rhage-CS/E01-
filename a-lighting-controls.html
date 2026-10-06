@@ -28,23 +28,20 @@
     const swatch = document.querySelector("#swatch");
 
   function showSelectedPreset() {
-      let item = presets[0];
-      for (let i = 0; i < presets.length; i++) {
-        if (i === selectedIndex) item = presets[i];
-      }
-      label.textContent = item.name;
-      swatch.style.backgroundColor = item.color;
+      const preset = presets[selectedIndex];
+      label.textContent = preset.name;
+      swatch.style.backgroundColor = preset.color;
+    }
+
+     // Move by +1 or -1, wrapping around both ends of the list.
+     function moveSelection(delta) {
+      selectedIndex = (selectedIndex + delta + presets.length) % presets.length;
+      showSelectedPreset();
     }
     
-    document.querySelector("#next").addEventListener("click", () => {
-      selectedIndex = (selectedIndex + 1) % presets.length;
+      document.querySelector("#next").addEventListener("click", () => moveSelection(1));
+      document.querySelector("#previous").addEventListener("click", () => moveSelection(-1));
       showSelectedPreset();
-    });
-    document.querySelector("#previous").addEventListener("click", () => {
-      selectedIndex = (selectedIndex - 1 + presets.length) % presets.length;
-      showSelectedPreset();
-    });
-    showSelectedPreset();
   </script>
 </body>
 </html>
